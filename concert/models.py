@@ -3,15 +3,20 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django.utils.timezone import now
 
 
 # Create your models here.
 
 class Concert(models.Model):
     # concert_name
+    concert_name = models.CharField(max_length=255, null=False)
     # duration
+    duration = models.IntegerField(null=False)
     # city
+    city = models.CharField(max_length=255, null=False)
     # date
+    date = models.DateField(default=now)
 
     def __str__(self):
         return self.concert_name
@@ -42,11 +47,17 @@ class ConcertAttending(models.Model):
 
 class Photo(models.Model):
     # id
+    id = models.IntegerField(primary_key=True)
     # pic_url
+    pic_url = models.CharField(max_length=1000, null=False)
     # event_country
+    event_country = models.CharField(max_length=255, null=False)
     # event_state
+    event_state = models.CharField(max_length=255, null=False)
     # event_city
+    event_city = models.CharField(max_length=255, null=False)
     # event_date
+    event_date = models.DateField(default=now)
 
     class Meta:
         managed = False
@@ -57,8 +68,11 @@ class Photo(models.Model):
 
 class Song(models.Model):
     # id
+    id = models.IntegerField(primary_key=True)
     # title
+    title = models.CharField(max_length=255, null=False)
     # lyrics
+    lyrics = models.TextField()
 
     class Meta:
         managed = False
